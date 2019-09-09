@@ -1,5 +1,5 @@
 # ===================================================================
-# Spring Boot configuration for the "dev" profile.
+# Spring Boot configuration for the "qa" profile.
 #
 # This configuration overrides the application.yml file.
 #
@@ -28,16 +28,16 @@ eureka:
 
 spring:
   profiles:
-    active: dev
+    active: qa
     include:
       - swagger
-      # Uncomment to activate TLS for the dev profile
+      # Uncomment to activate TLS for the qa profile
       #- tls
   devtools:
     restart:
       enabled: true
     livereload:
-      enabled: false # we use Webpack dev server + BrowserSync for livereload
+      enabled: false # we use Webpack qa server + BrowserSync for livereload
   jackson:
     serialization:
       indent-output: true
@@ -66,7 +66,7 @@ spring:
       hibernate.generate_statistics: false
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: qa, faker
   mail:
     host: localhost
     port: 25

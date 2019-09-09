@@ -41,6 +41,11 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
+            createCache(cm, io.crf.cattlelog.aminranch.domain.Consultant.class.getName());
+            createCache(cm, io.crf.cattlelog.aminranch.domain.Consultant.class.getName() + ".ranches");
+            createCache(cm, io.crf.cattlelog.aminranch.domain.Rancher.class.getName());
+            createCache(cm, io.crf.cattlelog.aminranch.domain.Ranch.class.getName());
+            createCache(cm, io.crf.cattlelog.aminranch.domain.Ranch.class.getName() + ".consultants");
             // jhipster-needle-ehcache-add-entry
         };
     }
