@@ -102,6 +102,19 @@ public class RancherResource {
         Optional<Rancher> rancher = rancherService.findOne(id);
         return ResponseUtil.wrapOrNotFound(rancher);
     }
+    
+    /**
+     * 
+     * @param userId
+     * @return
+     */
+    @GetMapping("/ranchers/user/{userId}")
+    public ResponseEntity<Rancher> getRancherByUserId(@PathVariable Long userId) {
+        log.debug("REST request to get Rancher by user id: {}", userId);
+        Optional<Rancher> rancher = rancherService.findOneByUserId(userId);
+//        Optional<Rancher> rancher =rancherService.findOne(userId);
+        return ResponseUtil.wrapOrNotFound(rancher);
+    }
 
     /**
      * {@code DELETE  /ranchers/:id} : delete the "id" rancher.

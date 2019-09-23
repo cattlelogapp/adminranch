@@ -35,9 +35,17 @@ public interface RancherService {
     Optional<Rancher> findOne(Long id);
 
     /**
+     * 
+     * @param userId
+     * @return
+     */
+    Optional<Rancher> findOneByUserId(Long userId);
+
+    /**
      * Delete the "id" rancher.
      *
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
 }

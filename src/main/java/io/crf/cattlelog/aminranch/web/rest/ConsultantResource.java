@@ -103,6 +103,13 @@ public class ConsultantResource {
         Optional<Consultant> consultant = consultantService.findOne(id);
         return ResponseUtil.wrapOrNotFound(consultant);
     }
+    
+    @GetMapping("/consultants/user/{userId}")
+    public ResponseEntity<Consultant> getConsultantByUserId(@PathVariable Long userId) {
+        log.debug("REST request to get Consultant : {}", userId);
+        Optional<Consultant> consultant = consultantService.findOneByUserId(userId);
+        return ResponseUtil.wrapOrNotFound(consultant);
+    }
 
     /**
      * {@code DELETE  /consultants/:id} : delete the "id" consultant.

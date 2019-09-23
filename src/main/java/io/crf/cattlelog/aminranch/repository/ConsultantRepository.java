@@ -25,5 +25,8 @@ public interface ConsultantRepository extends JpaRepository<Consultant, Long> {
 
     @Query("select consultant from Consultant consultant left join fetch consultant.ranches where consultant.id =:id")
     Optional<Consultant> findOneWithEagerRelationships(@Param("id") Long id);
+    
+    @Query("select consultant from Consultant consultant left join fetch consultant.ranches where consultant.userId =:userId")
+    Optional<Consultant> findOneByUserIdWithEagerRelationships(@Param("userId") Integer userId);
 
 }

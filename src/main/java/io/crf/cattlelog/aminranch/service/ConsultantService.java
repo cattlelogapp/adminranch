@@ -49,4 +49,6 @@ public interface ConsultantService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Optional<Consultant> findOneByUserId(Long userId);
 }

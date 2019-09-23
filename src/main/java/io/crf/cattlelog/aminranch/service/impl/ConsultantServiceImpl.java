@@ -69,12 +69,19 @@ public class ConsultantServiceImpl implements ConsultantService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    @Override
+     @Override
     @Transactional(readOnly = true)
     public Optional<Consultant> findOne(Long id) {
         log.debug("Request to get Consultant : {}", id);
         return consultantRepository.findOneWithEagerRelationships(id);
     }
+     
+     @Override
+     @Transactional(readOnly = true)
+     public Optional<Consultant> findOneByUserId(Long userId) {
+         log.debug("Request to get Consultant : {}", userId);
+         return consultantRepository.findOneByUserIdWithEagerRelationships(userId.intValue());
+     }
 
     /**
      * Delete the consultant by id.
