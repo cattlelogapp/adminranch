@@ -89,6 +89,23 @@ public class RanchResource {
         log.debug("REST request to get all Ranches");
         return ranchService.findAll();
     }
+    
+    /**
+     * 
+     * @return
+     */
+    @GetMapping("/ranches/rancher/{id}")
+    public List<Ranch> getAllRanchesByRancherId(@PathVariable Long id) {
+        log.debug("REST request to get all Ranches by Rancher Id");
+        return ranchService.findAllByRancherId(id);
+    }
+    
+    @GetMapping("/ranches/user/{id}")
+    public List<Ranch> getAllRanchesByUserId(@PathVariable Long id) {
+        log.debug("REST request to get all Ranches by User Id");
+        return ranchService.findAllByUserId(id);
+    }
+
 
     /**
      * {@code GET  /ranches/:id} : get the "id" ranch.

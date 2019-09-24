@@ -24,6 +24,15 @@ public interface RanchService {
      * @return the list of entities.
      */
     List<Ranch> findAll();
+    
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    List<Ranch> findAllByRancherId(Long id);
+    
+    List<Ranch> findAllByUserId(Long id);
 
 
     /**
@@ -33,6 +42,7 @@ public interface RanchService {
      * @return the entity.
      */
     Optional<Ranch> findOne(Long id);
+    
 
     /**
      * Delete the "id" ranch.

@@ -50,6 +50,26 @@ public class RanchServiceImpl implements RanchService {
         log.debug("Request to get all Ranches");
         return ranchRepository.findAll();
     }
+    
+    /**
+     * 
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Ranch> findAllByRancherId(Long id) {
+        log.debug("Request to get all Ranches by Rancher Id");
+        return ranchRepository.findAllByRancherId(id);
+    }
+    
+    /**
+     * 
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Ranch> findAllByUserId(Long id) {
+        log.debug("Request to get all Ranches by User Id");
+        return ranchRepository.findAllByUserId(id.intValue());
+    }
 
 
     /**
@@ -64,6 +84,7 @@ public class RanchServiceImpl implements RanchService {
         log.debug("Request to get Ranch : {}", id);
         return ranchRepository.findById(id);
     }
+    
 
     /**
      * Delete the ranch by id.
@@ -75,4 +96,5 @@ public class RanchServiceImpl implements RanchService {
         log.debug("Request to delete Ranch : {}", id);
         ranchRepository.deleteById(id);
     }
+
 }
