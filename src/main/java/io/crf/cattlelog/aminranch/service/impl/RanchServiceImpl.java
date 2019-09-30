@@ -1,6 +1,7 @@
 package io.crf.cattlelog.aminranch.service.impl;
 
 import io.crf.cattlelog.aminranch.service.RanchService;
+import io.crf.cattlelog.aminranch.service.dto.RanchAccessDTO;
 import io.crf.cattlelog.aminranch.domain.Ranch;
 import io.crf.cattlelog.aminranch.repository.RanchRepository;
 import org.slf4j.Logger;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 /**
  * Service Implementation for managing {@link Ranch}.
@@ -71,6 +74,12 @@ public class RanchServiceImpl implements RanchService {
         return ranchRepository.findAllByUserId(id.intValue());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Ranch> findAllForAccessByUserId(Long id) {
+        log.debug("Request to get all Ranches by User Id");
+        return ranchRepository.findAllForAccessByUserId(id.intValue());
+    }
 
     /**
      * Get one ranch by id.
@@ -96,5 +105,21 @@ public class RanchServiceImpl implements RanchService {
         log.debug("Request to delete Ranch : {}", id);
         ranchRepository.deleteById(id);
     }
+
+	@Override
+	public void registerAccess(@Valid RanchAccessDTO requestAccess) {
+		ranchRepository.registerAccess(requestAccess.getRanchId(), requestAccess.getConsultantId());
+		
+	}
+
+	@Override
+	public boolean hasAccess(@Valid RanchAccessDTO requestAccess) {
+		Object access = ranchRepository.findAccess(requestAccess.getRanchId(), requestAccess.getConsultantId());
+		if (access != null) {
+			return true;
+		};
+		
+		return false;
+	}
 
 }

@@ -2,13 +2,15 @@ package io.crf.cattlelog.aminranch.web.rest;
 
 import io.crf.cattlelog.aminranch.domain.Ranch;
 import io.crf.cattlelog.aminranch.service.RanchService;
+import io.crf.cattlelog.aminranch.service.dto.RanchAccessDTO;
 import io.crf.cattlelog.aminranch.web.rest.errors.BadRequestAlertException;
-
+import io.crf.cattlelog.aminranch.web.rest.errors.ExistingAccessException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -104,6 +106,22 @@ public class RanchResource {
     public List<Ranch> getAllRanchesByUserId(@PathVariable Long id) {
         log.debug("REST request to get all Ranches by User Id");
         return ranchService.findAllByUserId(id);
+    }
+    
+    @GetMapping("/ranches/access/user/{id}")
+    public List<Ranch> getAllRanchesForAccessByUserId(@PathVariable Long id) {
+        log.debug("REST request to get all Ranches by User Id");
+        return ranchService.findAllForAccessByUserId(id);
+    }
+    
+    @PostMapping("/ranches/access")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void requestAccess(@Valid @RequestBody RanchAccessDTO requestAccess) throws URISyntaxException{
+    	if (ranchService.hasAccess(requestAccess)) {
+            throw new ExistingAccessException();
+        }
+        ranchService.registerAccess(requestAccess);
+//        mailService.sendActivationEmail(user);
     }
 
 

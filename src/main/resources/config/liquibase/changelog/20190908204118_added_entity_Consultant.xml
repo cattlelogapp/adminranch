@@ -38,6 +38,9 @@
             <column name="consultant_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="status" type="string">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addPrimaryKey columnNames="consultant_id, ranch_id" tableName="consultant_ranch"/>
@@ -61,6 +64,17 @@
             <column name="id" type="numeric"/>
             <column name="user_id" type="numeric"/>
             <column name="licence" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+        </loadData>
+    </changeSet>
+    <changeSet id="20190908204118-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/consultant_ranch.csv"
+                  separator=";"
+                  tableName="consultant_ranch">
+            <column name="consultant_id" type="numeric"/>
+            <column name="ranch_id" type="numeric"/>
+            <column name="status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

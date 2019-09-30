@@ -1,9 +1,12 @@
 package io.crf.cattlelog.aminranch.service;
 
 import io.crf.cattlelog.aminranch.domain.Ranch;
+import io.crf.cattlelog.aminranch.service.dto.RanchAccessDTO;
 
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 /**
  * Service Interface for managing {@link Ranch}.
@@ -17,6 +20,8 @@ public interface RanchService {
      * @return the persisted entity.
      */
     Ranch save(Ranch ranch);
+    
+    
 
     /**
      * Get all the ranches.
@@ -32,7 +37,19 @@ public interface RanchService {
      */
     List<Ranch> findAllByRancherId(Long id);
     
+    /**
+     * 
+     * @param id
+     * @return
+     */
     List<Ranch> findAllByUserId(Long id);
+    
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    List<Ranch> findAllForAccessByUserId(Long id);
 
 
     /**
@@ -50,4 +67,10 @@ public interface RanchService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    void registerAccess(@Valid RanchAccessDTO requestAccess);
+
+	boolean hasAccess(@Valid RanchAccessDTO requestAccess);
+
+	
 }
