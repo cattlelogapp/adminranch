@@ -2,6 +2,7 @@ package io.crf.cattlelog.aminranch.service;
 
 import io.crf.cattlelog.aminranch.domain.Ranch;
 import io.crf.cattlelog.aminranch.service.dto.RanchAccessDTO;
+import io.crf.cattlelog.aminranch.service.dto.RanchWithAccessDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +50,9 @@ public interface RanchService {
      * @param id
      * @return
      */
-    List<Ranch> findAllForAccessByUserId(Long id);
+    List<RanchWithAccessDTO> findAllForConsultantWithAccessByUserId(Long id);
+    
+    List<RanchWithAccessDTO> findAllForRancherWithAccessByUserId(Long id);
 
 
     /**
@@ -69,6 +72,8 @@ public interface RanchService {
     void delete(Long id);
     
     void registerAccess(@Valid RanchAccessDTO requestAccess);
+    
+    void removeAccess(@Valid RanchAccessDTO requestAccess);
 
 	boolean hasAccess(@Valid RanchAccessDTO requestAccess);
 

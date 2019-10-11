@@ -6,6 +6,6 @@ public class ExistingAccessException extends BadRequestAlertException {
 	
 	public ExistingAccessException() {
 
-        super(ErrorConstants.DEFAULT_TYPE, "Access already requested", "ranch", "ranchAccessExists");
+        super(ErrorConstants.DEFAULT_TYPE,"Access to the Ranch already Requested. Re-sending the request email." , "adminranch", "adminRanch.ranchAccess.existing");
 	}
 }

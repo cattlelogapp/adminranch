@@ -25,17 +25,17 @@ public class Consultant implements Serializable {
 
     @NotNull
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "licence")
     private String licence;
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "consultant_ranch",
-               joinColumns = @JoinColumn(name = "consultant_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "ranch_id", referencedColumnName = "id"))
-    private Set<Ranch> ranches = new HashSet<>();
+//    @ManyToMany
+//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//    @JoinTable(name = "consultant_ranch",
+//               joinColumns = @JoinColumn(name = "consultant_id", referencedColumnName = "id"),
+//               inverseJoinColumns = @JoinColumn(name = "ranch_id", referencedColumnName = "id"))
+//    private Set<Ranch> ranches = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -46,16 +46,16 @@ public class Consultant implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public Consultant userId(Integer userId) {
+    public Consultant userId(Long userId) {
         this.userId = userId;
         return this;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -72,30 +72,30 @@ public class Consultant implements Serializable {
         this.licence = licence;
     }
 
-    public Set<Ranch> getRanches() {
-        return ranches;
-    }
-
-    public Consultant ranches(Set<Ranch> ranches) {
-        this.ranches = ranches;
-        return this;
-    }
-
-    public Consultant addRanch(Ranch ranch) {
-        this.ranches.add(ranch);
-        ranch.getConsultants().add(this);
-        return this;
-    }
-
-    public Consultant removeRanch(Ranch ranch) {
-        this.ranches.remove(ranch);
-        ranch.getConsultants().remove(this);
-        return this;
-    }
-
-    public void setRanches(Set<Ranch> ranches) {
-        this.ranches = ranches;
-    }
+//    public Set<Ranch> getRanches() {
+//        return ranches;
+//    }
+//
+//    public Consultant ranches(Set<Ranch> ranches) {
+//        this.ranches = ranches;
+//        return this;
+//    }
+//
+//    public Consultant addRanch(Ranch ranch) {
+//        this.ranches.add(ranch);
+//        ranch.getConsultants().add(this);
+//        return this;
+//    }
+//
+//    public Consultant removeRanch(Ranch ranch) {
+//        this.ranches.remove(ranch);
+//        ranch.getConsultants().remove(this);
+//        return this;
+//    }
+//
+//    public void setRanches(Set<Ranch> ranches) {
+//        this.ranches = ranches;
+//    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

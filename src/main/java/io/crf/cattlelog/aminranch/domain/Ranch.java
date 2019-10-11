@@ -36,10 +36,10 @@ public class Ranch implements Serializable {
     @JsonIgnoreProperties("ranches")
     private Rancher rancher;
 
-    @ManyToMany(mappedBy = "ranches")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<Consultant> consultants = new HashSet<>();
+//    @ManyToMany(mappedBy = "ranches")
+//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//    @JsonIgnore
+//    private Set<Consultant> consultants = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -89,30 +89,30 @@ public class Ranch implements Serializable {
         this.rancher = rancher;
     }
 
-    public Set<Consultant> getConsultants() {
-        return consultants;
-    }
-
-    public Ranch consultants(Set<Consultant> consultants) {
-        this.consultants = consultants;
-        return this;
-    }
-
-    public Ranch addConsultant(Consultant consultant) {
-        this.consultants.add(consultant);
-        consultant.getRanches().add(this);
-        return this;
-    }
-
-    public Ranch removeConsultant(Consultant consultant) {
-        this.consultants.remove(consultant);
-        consultant.getRanches().remove(this);
-        return this;
-    }
-
-    public void setConsultants(Set<Consultant> consultants) {
-        this.consultants = consultants;
-    }
+//    public Set<Consultant> getConsultants() {
+//        return consultants;
+//    }
+//
+//    public Ranch consultants(Set<Consultant> consultants) {
+//        this.consultants = consultants;
+//        return this;
+//    }
+//
+//    public Ranch addConsultant(Consultant consultant) {
+//        this.consultants.add(consultant);
+//        consultant.getRanches().add(this);
+//        return this;
+//    }
+//
+//    public Ranch removeConsultant(Consultant consultant) {
+//        this.consultants.remove(consultant);
+//        consultant.getRanches().remove(this);
+//        return this;
+//    }
+//
+//    public void setConsultants(Set<Consultant> consultants) {
+//        this.consultants = consultants;
+//    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

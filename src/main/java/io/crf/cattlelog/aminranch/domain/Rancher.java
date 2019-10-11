@@ -23,7 +23,7 @@ public class Rancher implements Serializable {
 
     @NotNull
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "code")
     private String code;
@@ -43,16 +43,16 @@ public class Rancher implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public Rancher userId(Integer userId) {
+    public Rancher userId(Long userId) {
         this.userId = userId;
         return this;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

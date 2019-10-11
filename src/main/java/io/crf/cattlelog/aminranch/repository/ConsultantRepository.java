@@ -11,22 +11,26 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Spring Data  repository for the Consultant entity.
+ * Spring Data repository for the Consultant entity.
  */
 @Repository
 public interface ConsultantRepository extends JpaRepository<Consultant, Long> {
 
-    @Query(value = "select distinct consultant from Consultant consultant left join fetch consultant.ranches",
-        countQuery = "select count(distinct consultant) from Consultant consultant")
-    Page<Consultant> findAllWithEagerRelationships(Pageable pageable);
+//    @Query(value = "select distinct consultant from Consultant consultant left join fetch consultant.ranches",
+//        countQuery = "select count(distinct consultant) from Consultant consultant")
+//    Page<Consultant> findAllWithEagerRelationships(Pageable pageable);
+//
+//    @Query("select distinct consultant from Consultant consultant left join fetch consultant.ranches")
+//    List<Consultant> findAllWithEagerRelationships();
+//
+//    @Query("select consultant from Consultant consultant left join fetch consultant.ranches where consultant.id =:id")
+//    Optional<Consultant> findOneWithEagerRelationships(@Param("id") Long id);
+//    
+//    @Query("select consultant from Consultant consultant left join fetch consultant.ranches where consultant.userId =:userId")
+//    Optional<Consultant> findOneByUserIdWithEagerRelationships(@Param("userId") Integer userId);
 
-    @Query("select distinct consultant from Consultant consultant left join fetch consultant.ranches")
-    List<Consultant> findAllWithEagerRelationships();
 
-    @Query("select consultant from Consultant consultant left join fetch consultant.ranches where consultant.id =:id")
-    Optional<Consultant> findOneWithEagerRelationships(@Param("id") Long id);
-    
-    @Query("select consultant from Consultant consultant left join fetch consultant.ranches where consultant.userId =:userId")
-    Optional<Consultant> findOneByUserIdWithEagerRelationships(@Param("userId") Integer userId);
+//	@Query("select consultant from Consultant consultant left join fetch consultant.ranches where consultant.userId =:userId")
+	Optional<Consultant> findOneByUserId(@Param("userId") Integer userId);
 
 }

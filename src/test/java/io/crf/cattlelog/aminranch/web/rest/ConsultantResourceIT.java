@@ -39,8 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AdminranchApp.class)
 public class ConsultantResourceIT {
 
-    private static final Integer DEFAULT_USER_ID = 1;
-    private static final Integer UPDATED_USER_ID = 2;
+    private static final Long DEFAULT_USER_ID = 1l;
+    private static final Long UPDATED_USER_ID = 2l;
 
     private static final String DEFAULT_LICENCE = "AAAAAAAAAA";
     private static final String UPDATED_LICENCE = "BBBBBBBBBB";

@@ -50,7 +50,8 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Transactional(readOnly = true)
     public List<Consultant> findAll() {
         log.debug("Request to get all Consultants");
-        return consultantRepository.findAllWithEagerRelationships();
+//        return consultantRepository.findAllWithEagerRelationships();
+        return consultantRepository.findAll();
     }
 
     /**
@@ -59,7 +60,8 @@ public class ConsultantServiceImpl implements ConsultantService {
      * @return the list of entities.
      */
     public Page<Consultant> findAllWithEagerRelationships(Pageable pageable) {
-        return consultantRepository.findAllWithEagerRelationships(pageable);
+//        return consultantRepository.findAllWithEagerRelationships(pageable);
+    	return consultantRepository.findAll(pageable);
     }
     
 
@@ -73,14 +75,16 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Transactional(readOnly = true)
     public Optional<Consultant> findOne(Long id) {
         log.debug("Request to get Consultant : {}", id);
-        return consultantRepository.findOneWithEagerRelationships(id);
+//        return consultantRepository.findOneWithEagerRelationships(id);
+        return consultantRepository.findById(id);
     }
      
      @Override
      @Transactional(readOnly = true)
      public Optional<Consultant> findOneByUserId(Long userId) {
          log.debug("Request to get Consultant : {}", userId);
-         return consultantRepository.findOneByUserIdWithEagerRelationships(userId.intValue());
+//         return consultantRepository.findOneByUserIdWithEagerRelationships(userId.intValue());
+         return consultantRepository.findOneByUserId(userId.intValue());
      }
 
     /**

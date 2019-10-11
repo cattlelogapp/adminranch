@@ -3,6 +3,7 @@ package io.crf.cattlelog.aminranch.web.rest;
 import io.crf.cattlelog.aminranch.domain.Ranch;
 import io.crf.cattlelog.aminranch.service.RanchService;
 import io.crf.cattlelog.aminranch.service.dto.RanchAccessDTO;
+import io.crf.cattlelog.aminranch.service.dto.RanchWithAccessDTO;
 import io.crf.cattlelog.aminranch.web.rest.errors.BadRequestAlertException;
 import io.crf.cattlelog.aminranch.web.rest.errors.ExistingAccessException;
 import io.github.jhipster.web.util.HeaderUtil;
@@ -108,10 +109,22 @@ public class RanchResource {
         return ranchService.findAllByUserId(id);
     }
     
-    @GetMapping("/ranches/access/user/{id}")
-    public List<Ranch> getAllRanchesForAccessByUserId(@PathVariable Long id) {
-        log.debug("REST request to get all Ranches by User Id");
-        return ranchService.findAllForAccessByUserId(id);
+//    @GetMapping("/ranches/access/user/{id}")
+//    public List<Ranch> getAllRanchesForAccessByUserId(@PathVariable Long id) {
+//        log.debug("REST request to get all Ranches by User Id");
+//        return ranchService.findAllForAccessByUserId(id);
+//    }
+    
+    @GetMapping("/ranches/access/consultant/user/{id}")
+    public List<RanchWithAccessDTO> getAllRanchesForConsultantWithAccessByUserId(@PathVariable Long id) {
+        log.debug("REST request to get all Ranches by User Id with Access");
+        return ranchService.findAllForConsultantWithAccessByUserId(id);
+    }
+    
+    @GetMapping("/ranches/access/rancher/user/{id}")
+    public List<RanchWithAccessDTO> getAllRanchesForRancherWithAccessByUserId(@PathVariable Long id) {
+        log.debug("REST request to get all Ranches by User Id with Access");
+        return ranchService.findAllForRancherWithAccessByUserId(id);
     }
     
     @PostMapping("/ranches/access")
