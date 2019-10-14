@@ -45,12 +45,10 @@ public interface RanchService {
      */
     List<Ranch> findAllByUserId(Long id);
     
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    List<RanchWithAccessDTO> findAllForConsultantWithAccessByUserId(Long id);
+
+	List<RanchWithAccessDTO> findAllForConsultantWithAccess();
+	
+    List<RanchWithAccessDTO> findAllForConsultantWithAccessByRanchName(String ranchName);
     
     List<RanchWithAccessDTO> findAllForRancherWithAccessByUserId(Long id);
 
@@ -76,6 +74,13 @@ public interface RanchService {
     void removeAccess(@Valid RanchAccessDTO requestAccess);
 
 	boolean hasAccess(@Valid RanchAccessDTO requestAccess);
+
+	void deleteAccess(Long ranchId, Long consultantId);
+
+	void grantAccess(@Valid RanchAccessDTO grantAccess);
+
+
+
 
 	
 }

@@ -40,12 +40,18 @@ public interface RanchRepository extends JpaRepository<Ranch, Long> {
 			+ "	LEFT JOIN rancher ON rancher.id = ranch.rancher_id\n"
 			+ "WHERE rancher.user_id = :userId OR (consultant.user_id = :userId "
 			+ "AND contract.status = 'ACTIVE')", nativeQuery = true)
-	List<Ranch> findAllByUserId(@Param("userId") Integer userId);
+	List<Ranch> findAllByUserId(@Param("userId") Long userId);
 
 	@Query(value = "SELECT new io.crf.cattlelog.aminranch.service.dto.RanchWithAccessDTO(r.id, r.name, t.status, c.userId) \n"
 			+ "	FROM Ranch r \n" + "		LEFT JOIN Contract t ON r.id = t.ranch.id \n"
-			+ "		LEFT JOIN Consultant c ON t.consultant.id = c.id")
-	List<RanchWithAccessDTO> findAllForConsultantWithAccessByUserId(@Param("userId") Long userId);
+			+ "		LEFT JOIN Consultant c ON t.consultant.id = c.id \n"
+			+ "WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :ranchName,'%'))")
+	List<RanchWithAccessDTO> findAllForConsultantWithAccessByRanchName(@Param("ranchName") String ranchName);
+	
+	@Query(value = "SELECT new io.crf.cattlelog.aminranch.service.dto.RanchWithAccessDTO(r.id, r.name, t.status, c.userId) \n"
+			+ "	FROM Ranch r \n" + "		LEFT JOIN Contract t ON r.id = t.ranch.id \n"
+			+ "		LEFT JOIN Consultant c ON t.consultant.id = c.id \n")
+	List<RanchWithAccessDTO> findAllForConsultantWithAccess();
 
 	@Query(value = "SELECT new io.crf.cattlelog.aminranch.service.dto.RanchWithAccessDTO(r.id, r.name, t.status, c.userId) \n"
 			+ "	FROM Ranch r \n" + "		LEFT JOIN Contract t ON r.id = t.ranch.id \n"
@@ -56,12 +62,21 @@ public interface RanchRepository extends JpaRepository<Ranch, Long> {
 
 	@Modifying
 	@Query(value = "INSERT INTO consultant_ranch (ranch_id, consultant_id, status) values (:ranchId, :consultantId, 'NEW')", nativeQuery = true)
-	void registerAccess(@Param("ranchId") Integer ranchId, @Param("consultantId") Integer consultantId);
+	void registerAccess(@Param("ranchId") Long ranchId, @Param("consultantId") Long consultantId);
+
+	@Modifying
+	@Query(value = "UPDATE consultant_ranch SET status = 'ACTIVE' WHERE ranch_id = :ranchId AND consultant_id = :consultantId", nativeQuery = true)
+	void grantAccess(@Param("ranchId") Long ranchId, @Param("consultantId") Long consultantId);
+	
+	@Modifying
+	@Query(value = "DELETE FROM consultant_ranch WHERE ranch_id = :ranchId AND consultant_id = :consultantId", nativeQuery = true)
+	void removeAccess(@Param("ranchId") Long ranchId, @Param("consultantId") Long consultantId);
+
+	@Query(value = "SELECT * FROM consultant_ranch WHERE ranch_id = :ranchId AND consultant_id = :consultantId", nativeQuery = true)
+	Object findAccess(@Param("ranchId") Long ranchId, @Param("consultantId") Long consultantId);
 
 	@Modifying
 	@Query(value = "DELETE FROM consultant_ranch WHERE ranch_id = :ranchId AND consultant_id = :consultantId", nativeQuery = true)
-	void removeAccess(@Param("ranchId") Integer ranchId, @Param("consultantId") Integer consultantId);
+	void deleteAccess(@Param("ranchId") Long ranchId, @Param("consultantId") Long consultantId);
 
-	@Query(value = "SELECT * FROM consultant_ranch WHERE ranch_id = :ranchId AND consultant_id = :consultantId", nativeQuery = true)
-	Object findAccess(@Param("ranchId") Integer ranchId, @Param("consultantId") Integer consultantId);
 }

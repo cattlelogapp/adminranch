@@ -115,10 +115,16 @@ public class RanchResource {
 //        return ranchService.findAllForAccessByUserId(id);
 //    }
     
-    @GetMapping("/ranches/access/consultant/user/{id}")
-    public List<RanchWithAccessDTO> getAllRanchesForConsultantWithAccessByUserId(@PathVariable Long id) {
-        log.debug("REST request to get all Ranches by User Id with Access");
-        return ranchService.findAllForConsultantWithAccessByUserId(id);
+    @GetMapping("/ranches/access")
+    public List<RanchWithAccessDTO> getAllRanchesForConsultantWithAccess() {
+        log.debug("REST request to get all Ranches by with Access");
+        return ranchService.findAllForConsultantWithAccess();
+    }
+        
+	@GetMapping("/ranches/access/ranch/{ranchName}")
+	public List<RanchWithAccessDTO> getAllRanchesForConsultantWithAccessByRanchName(@PathVariable String ranchName) {
+		log.debug("REST request to get all Ranches by User Id with Access");
+		return ranchService.findAllForConsultantWithAccessByRanchName(ranchName);
     }
     
     @GetMapping("/ranches/access/rancher/user/{id}")
@@ -127,7 +133,7 @@ public class RanchResource {
         return ranchService.findAllForRancherWithAccessByUserId(id);
     }
     
-    @PostMapping("/ranches/access")
+    @PostMapping("/ranches/access/request")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void requestAccess(@Valid @RequestBody RanchAccessDTO requestAccess) throws URISyntaxException{
     	if (ranchService.hasAccess(requestAccess)) {
@@ -135,6 +141,26 @@ public class RanchResource {
         }
         ranchService.registerAccess(requestAccess);
 //        mailService.sendActivationEmail(user);
+    }
+    
+    @PostMapping("/ranches/access/grant")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void grantAccess(@Valid @RequestBody RanchAccessDTO grantAccess) throws URISyntaxException{
+        ranchService.grantAccess(grantAccess);
+//        mailService.sendActivationEmail(user);
+    }
+    
+    /**
+     * {@code DELETE  /ranches/:id} : delete the "id" ranch.
+     *
+     * @param id the id of the ranch to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/ranches/access/{ranchId}/{consultantId}")
+    public ResponseEntity<Void> deleteRanchAccess(@PathVariable Long ranchId, @PathVariable Long consultantId) {
+        log.debug("REST request to delete Access for ranch {} and consultant {}", ranchId, consultantId);
+        ranchService.deleteAccess(ranchId, consultantId);
+        return ResponseEntity.noContent().build();
     }
 
 

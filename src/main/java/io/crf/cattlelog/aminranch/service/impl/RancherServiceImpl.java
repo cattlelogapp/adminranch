@@ -69,7 +69,7 @@ public class RancherServiceImpl implements RancherService {
     @Transactional(readOnly = true)
     public Optional<Rancher> findOneByUserId(Long userId) {
         log.debug("Request to get Rancher by user id: {}", userId);
-        return rancherRepository.findByUserId(userId.intValue());
+        return rancherRepository.findByUserId(userId);
     }
 
     /**

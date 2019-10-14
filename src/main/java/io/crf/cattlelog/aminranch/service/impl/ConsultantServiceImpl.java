@@ -84,7 +84,7 @@ public class ConsultantServiceImpl implements ConsultantService {
      public Optional<Consultant> findOneByUserId(Long userId) {
          log.debug("Request to get Consultant : {}", userId);
 //         return consultantRepository.findOneByUserIdWithEagerRelationships(userId.intValue());
-         return consultantRepository.findOneByUserId(userId.intValue());
+         return consultantRepository.findOneByUserId(userId);
      }
 
     /**

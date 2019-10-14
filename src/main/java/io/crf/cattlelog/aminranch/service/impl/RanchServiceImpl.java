@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -72,14 +73,21 @@ public class RanchServiceImpl implements RanchService {
     @Transactional(readOnly = true)
     public List<Ranch> findAllByUserId(Long id) {
         log.debug("Request to get all Ranches by User Id");
-        return ranchRepository.findAllByUserId(id.intValue());
+        return ranchRepository.findAllByUserId(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RanchWithAccessDTO> findAllForConsultantWithAccessByUserId(Long id) {
+    public List<RanchWithAccessDTO> findAllForConsultantWithAccessByRanchName(String ranchName) {
         log.debug("Request to get all Ranches by User Id for a consultant");
-        return ranchRepository.findAllForConsultantWithAccessByUserId(id);
+        return ranchRepository.findAllForConsultantWithAccessByRanchName(ranchName);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<RanchWithAccessDTO> findAllForConsultantWithAccess() {
+        log.debug("Request to get all Ranches for a consultant");
+        return ranchRepository.findAllForConsultantWithAccess();
     }
     
     @Override
@@ -87,6 +95,17 @@ public class RanchServiceImpl implements RanchService {
     public List<RanchWithAccessDTO> findAllForRancherWithAccessByUserId(Long id) {
         log.debug("Request to get all Ranches by User Id for a rancher");
         return ranchRepository.findAllForRancherWithAccessByUserId(id);
+    }
+    
+    @Override
+    public void deleteAccess(Long ranchId, Long consultantId) {
+        log.debug("Request to delete Access for ranch {} and consultant {}", ranchId, consultantId);
+        ranchRepository.deleteAccess(ranchId, consultantId);
+    }
+    
+    public void grantAccess(RanchAccessDTO requestAccess) {
+        log.debug("Request to grant Access for ranch {} and consultant {}", requestAccess.getRanchId(), requestAccess.getConsultantId());
+        ranchRepository.grantAccess(requestAccess.getRanchId(), requestAccess.getConsultantId());
     }
 
     /**

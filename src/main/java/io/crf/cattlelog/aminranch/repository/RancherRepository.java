@@ -20,6 +20,6 @@ public interface RancherRepository extends JpaRepository<Rancher, Long> {
 	 * @param userId
 	 * @return
 	 */
-	Optional<Rancher> findByUserId(Integer userId);
+	Optional<Rancher> findByUserId(Long userId);
 
 }

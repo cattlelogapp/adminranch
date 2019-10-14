@@ -2,26 +2,26 @@ package io.crf.cattlelog.aminranch.service.dto;
 
 public class RanchAccessDTO {
 
-	private Integer consultantId;
+	private Long consultantId;
 	
-	private Integer ranchId;
+	private Long ranchId;
 	
 	
 
 
-	public Integer getConsultantId() {
+	public Long getConsultantId() {
 		return consultantId;
 	}
 
-	public void setConsultantId(Integer consultantId) {
+	public void setConsultantId(Long consultantId) {
 		this.consultantId = consultantId;
 	}
 
-	public Integer getRanchId() {
+	public Long getRanchId() {
 		return ranchId;
 	}
 
-	public void setRanchId(Integer ranchId) {
+	public void setRanchId(Long ranchId) {
 		this.ranchId = ranchId;
 	}
 	
